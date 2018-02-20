@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+<div align="center">
+    <form action="/car/findcar" method="post" class="form-horizontal">
+        <label>
+            City:
+        </label>
+        <select name="filter[city]">
+            <option value="Faridabad">Faridabad</option>
+            <option value="Gurugram">Gurugram</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Chandigarh">Chandigarh</option>
+        </select>
+
+        <label>
+            Category:
+            </label>
+            <select name="filter[category]">
+                <option value="suv">SUV</option>
+                <option value="sedan">Sedan</option>
+                <option value="van">Van</option>
+            </select>
+
+            <button class="btn btn-primary btn-lg">Find Car</button>
+    </form>
+    <a href = "/car/showcar" class="btn btn-primary btn-lg">Show Car</a>
+
+</div>
+<% include ../partials/footer %>
+

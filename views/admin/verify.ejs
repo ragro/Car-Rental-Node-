@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<% users.forEach( function(user){   %>
+
+   <% if(user.verified == false){ %>
+        <li><%= user.fname %></li>
+        <li><%= user.license %></li>
+        <a href="/admin/verify/<%= user._id %>" class="btn btn-warning btn-lg">Verify</a>
+   <% } %>
+<% } ) %>
+
+<% include ../partials/footer %>

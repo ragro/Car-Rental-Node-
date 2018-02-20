@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<div class="form" align="center">
+
+        <p><h1>Payment Portal</h1></p>
+        <form action="/car/payment/<%= car._id %>/<%= userid %>" method="POST">
+            <div class="form-group">
+                    <label for="price">
+                            Price:
+                        </label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="price" value="<%= car.rate %>">
+                        </div>
+            </div>
+
+            <div class="form-group">
+                    <label for="cardnumber">
+                            CardNumber :
+                     </label>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="pay[cardnumber]">
+                        </div>
+            </div>
+
+            <div class="form-group">
+                    <label for="cvv">
+                            Cvv :
+                     </label>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="pay[cvv]">
+                        </div>
+            </div>
+
+               <button>Pay:</button>
+        </form>
+</div>
+
+ 
+<% include ../partials/footer %>

@@ -1,0 +1,52 @@
+.form{
+    margin:auto 40%;
+
+}
+
+body{
+    /* padding:70px; */
+    background: url(https://static.pexels.com/photos/13861/IMG_3496bfree.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: Lato;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.navbar{
+    margin-top:0px;
+}
+
+.form-control{
+    border:none;
+    border-bottom:1px solid #adadad;
+    width:100%;
+    
+}
+
+.image{
+    margin-top:10%;
+    margin-bottom:20px;
+    border-radius: 15px;
+    height:80%;
+    width: 80%;
+}
+
+.details{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    background-color: steelblue;
+}
+
+.carblock{
+    margin: 5px 10px 5px 100px;
+    height: 25%;
+    width: 80%;
+}
+
+body{
+    font-family: Lato;
+}
+
+

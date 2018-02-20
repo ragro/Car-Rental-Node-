@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+    <% users.forEach(function(user) {  %>
+    <div class = "container">        
+      <%  if( user.usertype == "user"){ %>
+       
+            <ul>
+                <li> <%= user.fname %> <%= user.lname %> </li>
+                <li> <%= user.phone %> </li>
+                <li> <%= user.city %> </li>
+                <li> <%= user.license %> </li>
+                <li>Blocked : <%= user.blocked %></li>
+                <a class="btn btn-primary btn-md" href="/admin/block/<%= user._id %>">
+                 <% if(user.blocked == false){ %>
+                        BlockUser
+                <% }else{ %>
+                        Unblock
+                  <%  }   %>
+                </a>
+          <% } %>   
+        </ul>
+    </div>    
+    <% }) %> 
+
+</div>
+
+
+<% include ../partials/footer %>

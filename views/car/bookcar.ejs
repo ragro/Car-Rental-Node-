@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+    <div class="row text-center">
+        <div class="col-lg-4">
+                <div class="thumbnail">
+                        <img class="img-responsive" src = "<%= car.image %>" height="250" width="350">
+                </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div>
+            <p>Choose duration:</p>
+            <form class="vertical-form" action="/car/book/<%= car._id %>/<%= currentUser._id %>">
+                    <div class="form-group">
+                        <input type = "date" name="filter[date]">
+                    </div>
+
+                    <button class="btn btn-primary btn-lg" >Continue</button>
+            </form>
+        </div>
+    
+        </div>
+    </div>
+    
+    
+</div>
