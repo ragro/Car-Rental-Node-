@@ -5,8 +5,28 @@
     <% users.forEach(function(user) {  %>
     <div class = "container">        
       <%  if( user.usertype == "user"){ %>
-       
-            <ul>
+     <table>
+         <th>FIRST NAME</th>
+         <th>LAST NAME</th>
+         <th>CITY</th>
+         <th>LICENSE</th>
+         <th>BLOCKED</th>
+         <th></th>
+         <td><%= user.fname %> <%= user.lname %></td>
+         <td><%= user.phone %></td>
+         <td><%= user.city %></td>
+         <td><%= user.license %></td>
+         <td>Blocked : <%= user.blocked %></li>
+            <a class="btn btn-primary btn-md" href="/admin/block/<%= user._id %>">
+             <% if(user.blocked == false){ %>
+                    BlockUser
+            <% }else{ %>
+                    Unblock
+              <%  }   %>
+            </a></td>
+         <td></td>
+     </table>  
+            <!-- <ul>
                 <li> <%= user.fname %> <%= user.lname %> </li>
                 <li> <%= user.phone %> </li>
                 <li> <%= user.city %> </li>
@@ -20,7 +40,7 @@
                   <%  }   %>
                 </a>
           <% } %>   
-        </ul>
+        </ul> -->
     </div>    
     <% }) %> 
 
