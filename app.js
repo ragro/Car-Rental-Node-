@@ -140,7 +140,7 @@ app.use("/car",carRoutes);
 
 //Starting Server
 
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT||3003, function(){
     console.log("Server Connected");
 });
 
