@@ -7,6 +7,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
          <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">      
        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js "></script>
+
+       <style>
+            table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        
+        </style>
+
+
     </head>
 
     <body>
@@ -24,8 +45,10 @@
                        <% } else { %>
                        <% if(currentUser.usertype == "admin"){ %>
                             <li> <a href = "#"><i class="fa fa-user"></i>Signed as Admin</a></li>
+                            <li> <a href="/admin/dashboard">Dashboard</a></li>
                        <% }else{ %>
-                            <li> <a href = "#"><i class="fa fa-user"></i>Signed as <%= currentUser.fname %></a></li>                            
+                            <li> <a href = "#"><i class="fa fa-user"></i>Signed as <%= currentUser.fname %></a></li> 
+                            <li> <a href="/user/dashboard">Dashboard</a></li>                           
                        <% } %>
                             <li> <a href="/user/logout"> Logout </a> </li>
                        <% } %>

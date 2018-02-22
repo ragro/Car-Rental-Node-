@@ -1,78 +1,79 @@
 <% include ../partials/header %>
 
-    <div class="form" align="center">
+<div class="formbg">
+    <!-- <div class="form" align="center"> -->
+    <div style="width:30%; margin:25px auto;">  
         <p><h1> Register </h1></p>
         <form action = "/user/register" method = "POST">
-            <label for="fname">
-                First Name:
-            </label>
-            <div class="form-group">
-                <input class="form-control" type="text" name="fname">
-            </div>
-
-            <label for="lname">
-                Last Name:
-            </label>
-            <div class="form-group">
-                    <input class="form-control" type="text" name="lname">
-            </div>
-
-            <label for="age">
-                Age:
-            </label>
-            <div class="form-group">
-                    <input class="form-control" type="text" name="age">
-            </div>
-
-            <label for="city">
-                City:
-            </label>
-            <div class="form-group">
-                    <input class="form-control" type="text" name="city">
-            </div>
-
-            <label for="license">
-                Driving License:
-            </label>
-            <div class="form-group">
-                    <input class="form-control" type="text" name="license">
-            </div>
-
-
-            <label for="email">
-                Email:
-            </label>
-            <div class="form-group">
-                <input class="form-control" type="text" name="email">
-            </div>
-
-            <label for="phone">
-                Phone:
-            </label>
-            <div class="form-group">
-                <input class="form-control" type="text" name="phone">
-            </div>
-
-            <label for="username">
-                    User Name:
+                <label for="fname">
+                    First Name:
                 </label>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="username">
+                    <input class="form-control" type="text" name="fname" placeholder="firstname">
                 </div>
-    
-                <label for="password">
-                    Password:
+
+                <label for="lname">
+                    Last Name:
                 </label>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="password">
+                        <input class="form-control" type="text" name="lname" placeholder="lastname">
                 </div>
 
-                <button class="btn btn-primary">Register</button>
-    </div>
+                <label for="age">--
+                    Age:
+                </label>
+                <div class="form-group">
+                        <input class="form-control" type="text" name="age" placeholder="age">
+                </div>
 
-               
+                <label for="city">
+                    City:
+                </label>
+                <div class="form-group">
+                        <input class="form-control" type="text" name="city" placeholder="city">
+                </div>
+
+                <label for="license">
+                    Driving License:
+                </label>
+                <div class="form-group">
+                        <input class="form-control" type="text" name="license" placeholder="Driving license number">
+                </div>
+
+
+                <label for="email">
+                    Email:
+                </label>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" placeholder="email">
+                </div>
+
+                <label for="phone">
+                    Phone:
+                </label>
+                <div class="form-group">
+                    <input class="form-control" type="number" name="phone" placeholder="phone">
+                </div>
+
+                <label for="username">
+                        User Name:
+                    </label>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="username" placeholder="username">
+                    </div>
+        
+                    <label for="password">
+                        Password:
+                    </label>
+                    <div class="form-group">
+                        <input class="form-control" type="password" name="password" placeholder="password">
+                    </div>
+
+                    <div class="form-group">
+                            <button class="btn btn-primary btn-lg btn-block">Register</button>
+                        </div>    
         </form>
     </div>
-
+</div>
 
     <% include ../partials/footer %>

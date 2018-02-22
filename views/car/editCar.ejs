@@ -1,6 +1,7 @@
+<% include ../partials/header %>
 
-
-<div class="form" align="center">
+<!-- <div class="form" align="center"> -->
+    <div style="width:30%; margin:25px auto;">  
         <h1 style="text-align:center;">Edit <%= car.name %> </h1>
         <div class="thumbnail">
             <img src="<%= car.image %>" height="200px" width="200px">
@@ -39,14 +40,17 @@
                 <div class="form-group">
                         <label for="price">Rate: </label>
                     <div class="form-group"> 
-                        <input type="text" class="form-control" name="car[price]" value="<%= car.price %>">
+                        <input type="text" class="form-control" name="car[price]" value="<%= car.rate %>">
                     </div>
                 </div>
 
-                <button class="btn btn-primary btn-lg">Update</button>
+                <button class="btn btn-primary btn-lg btn-block">Update</button>
             
             </div>
             
     </form>
 
 </div>
+
+
+<% include ../partials/footer %>

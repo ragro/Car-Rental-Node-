@@ -5,7 +5,10 @@
 
 body{
     /* padding:70px; */
-    background: url(https://static.pexels.com/photos/13861/IMG_3496bfree.jpg);
+    /* background: url(https://static.pexels.com/photos/13861/IMG_3496bfree.jpg); */
+    background-color:   #ccff99;
+	background: -webkit-linear-gradient(to right, #FF8235, #30E8BF);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #FF8235, #30E8BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
     background-position: center;
     font-family: Lato;
@@ -45,8 +48,36 @@ body{
     width: 80%;
 }
 
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #d9aeae;
+}
+
+
+tr:nth-child(odd) {
+    background-color: #cd9d9d;
+}
+
 body{
     font-family: Lato;
 }
 
-
+.formbg{
+    background-color: #dddddd;
+    margin-left:20%;
+    margin-right:20%;
+    padding-top:1%;
+    padding-bottom: 1%;
+}

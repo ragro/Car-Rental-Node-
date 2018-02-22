@@ -1,12 +1,31 @@
 <% include ../partials/header %>
 
-<% users.forEach( function(user){   %>
+<!-- <div class="formbg"> -->
 
-   <% if(user.verified == false){ %>
-        <li><%= user.fname %></li>
-        <li><%= user.license %></li>
-        <a href="/admin/verify/<%= user._id %>" class="btn btn-warning btn-lg">Verify</a>
-   <% } %>
-<% } ) %>
+        <div class="container">
 
+    
+                <table>
+                            <tr>
+                                    <th>NAME</th>
+                                    <th>PHONE</th>
+                                    <th>CITY</th>
+                                    <th>D.LICENSE</th>
+                                    <th>Verify</th>
+                                   
+                            </tr>
+
+                <% users.forEach( function(user){   %>
+
+            <% if(user.verified == false){ %>
+                <tr>
+                        <td><%= user.fname %> <%= user.lname %></td>
+                        <td><%= user.phone %></td>
+                        <td><%= user.city %></td>
+                        <td><%= user.license %></td>
+                        <td><a href="/admin/verify/<%= user._id %>" class="btn btn-warning btn-lg">Verify</a></td>
+                </tr>  
+            <% } %>
+        <% } ) %>
+</div>
 <% include ../partials/footer %>
