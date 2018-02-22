@@ -18,7 +18,7 @@ const express    =  require("express"),
             var city  = req.body.filter.city;
             console.log(category);
             console.log(city);
-            Car.find({city: city}, function(err,foundCar){
+            Car.find({city: city, category: category}, function(err,foundCar){
                     if(err)
                     {   
                         console.log(err.message);
