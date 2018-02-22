@@ -13,6 +13,7 @@
                             <p> Rs. <%= car.rate %>/day</p>
                             <p> <%= car.number %></p>
                             <p> <%= car.city %></p>
+                            <p><%= car.category %></p>
                                 
                          <%   if(currentUser.usertype == "user"){  %>
                               <%  if(currentUser.blocked == false && currentUser.verified == true){ %>
