@@ -30,17 +30,51 @@
                 </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                             <label for="city"> City: </label>
                 <div class="form-group"> 
                      <input type="text" class="form-control" name="car[city]" value="<%= car.city %>">
                 </div>
-                </div>
+                </div> -->
+                
+                <div class="form-group">
+                        <label>
+                                        City:
+                        </label>
+                                    <div class="form-group">
+                                                <select name="car[city]">
+                                                                <option value="Faridabad">Faridabad</option>
+                                                                <option value="Gurugram">Gurugram</option>
+                                                                <option value="Delhi">Delhi</option>
+                                                                <option value="Chandigarh">Chandigarh</option>
+                                                </select>
+                                                    
+                                    </div>
+                                    
+                            
+        </div>
+         
+        <div class="form-group">
+                        <label>
+                                        Category:
+                                        </label>
+       
+                <div class="form-group">
+                                <select name="car[category]">
+                                                <option value="suv">SUV</option>
+                                                <option value="sedan">Sedan</option>
+                                                <option value="van">Van</option>
+                                                </select>
+                                        
+                </div>                          
+        </div>
+
+
 
                 <div class="form-group">
                         <label for="price">Rate: </label>
                     <div class="form-group"> 
-                        <input type="text" class="form-control" name="car[price]" value="<%= car.rate %>">
+                        <input type="text" class="form-control" name="car[rate]" value="<%= car.rate %>">
                     </div>
                 </div>
 
