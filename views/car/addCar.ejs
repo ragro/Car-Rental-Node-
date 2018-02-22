@@ -12,37 +12,71 @@
                         <div class="form-group">
                             <label for="name"> Name:</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" autofocus required>
                             </div>
                         </div>
 
                         <div class="form-group">
                                 <label for="number"> Number: </label>
                                 <div class="form-group"> 
-                                <input type="text" class="form-control" name="number">
+                                <input type="text" class="form-control" name="number" required>
                                 </div>
                         </div>
-
+<!-- 
                         <div class="form-group">
                                 <label for="number"> Category: </label>
                                 <div class="form-group"> 
-                                <input type="text" class="form-control" name="category">
+                                <input type="text" class="form-control" name="category" required>
                                 </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                                 <label for="image"> Picture: </label>
-                        <div class="form-group">   <input type="text" class="form-control" name="image"> </div>
+
+                                <div class="form-group">  
+                                         <input type="text" class="form-control" name="image" required>
+                                 </div>
                         </div>
 
                         <div class="form-group">
-                                    <label for="city"> City: </label>
-                        <div class="form-group">  <input type="text" class="form-control" name="city"> </div>
+                                        <label>
+                                                        City:
+                                        </label>
+                                                    <div class="form-group">
+                                                                <select name="city">
+                                                                                <option value="Faridabad">Faridabad</option>
+                                                                                <option value="Gurugram">Gurugram</option>
+                                                                                <option value="Delhi">Delhi</option>
+                                                                                <option value="Chandigarh">Chandigarh</option>
+                                                                </select>
+                                                                    
+                                                    </div>
+                                                    
+                                            
                         </div>
+                         
+                        <div class="form-group">
+                                        <label>
+                                                        Category:
+                                                        </label>
+                       
+                                <div class="form-group">
+                                                <select name="category">
+                                                                <option value="suv">SUV</option>
+                                                                <option value="sedan">Sedan</option>
+                                                                <option value="van">Van</option>
+                                                                </select>
+                                                        
+                                </div>                          
+                        </div>
+                        <!-- <div class="form-group">
+                                    <label for="city"> City: </label>
+                        <div class="form-group">  <input type="text" class="form-control" name="city" required> </div>
+                        </div> -->
 
                         <div class="form-group">
                                 <label for="price">Rate: </label>
-                            <div class="form-group"> <input type="text" class="form-control" name="rate"> </div>
+                            <div class="form-group"> <input type="text" class="form-control" name="rate" required> </div>
                         </div>
 
                         <button class="btn btn-primary btn-lg btn-block">Add Car</button>
