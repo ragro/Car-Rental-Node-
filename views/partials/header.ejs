@@ -44,10 +44,10 @@
                             <li> <a href="/user/register"> Register </a> </li>
                        <% } else { %>
                        <% if(currentUser.usertype == "admin"){ %>
-                            <li> <a href = "#"><i class="fa fa-user"></i>Signed as Admin</a></li>
+                            <li> <a href = "#"><i class="fa fa-user"></i>Welcome Admin</a></li>
                             <li> <a href="/admin/dashboard">Dashboard</a></li>
                        <% }else{ %>
-                            <li> <a href = "#"><i class="fa fa-user"></i>Signed as <%= currentUser.fname %></a></li> 
+                            <li> <a href = "#"><i class="fa fa-user"></i>Welcome <%= currentUser.fname %></a></li> 
                             <li> <a href="/user/dashboard">Dashboard</a></li>                           
                        <% } %>
                             <li> <a href="/user/logout"> Logout </a> </li>
