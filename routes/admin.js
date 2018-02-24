@@ -13,12 +13,12 @@ const express = require("express"),
     //   passport.use(new LocalStrategy(admin.authenticate()) );
 
 
-  router.get("/login",function(req, res){
+  router.get("/login",middleware.isalreadyLoggedin,function(req, res){
       res.render("admin/login");
   });
   
   //route for login form handling
-  router.post("/login", passport.authenticate("local",{
+  router.post("/login", middleware.isalreadyLoggedin, passport.authenticate("local",{
       successRedirect :"/admin/dashboard",
       failureRedirect : "/admin/login"
   }),function(req, res){});
@@ -62,8 +62,21 @@ const express = require("express"),
       res.redirect("/");
   });
     
+
+  //route to show all users
+router.get("/showUsers",middleware.isLoggedIn, function(req, res){
+    User.find(function(err, foundUsers){
+        if(err){
+            res.flash("error", err.message);
+            return res.redirect("back");
+        }else{
+            res.render("admin/showUser", {users: foundUsers});
+        }
+    });
+});
+
   //route to show user needed to verify
-  router.get("/verifyUser",middleware.isAdmin, function(req, res){
+  router.get("/verifyUser", middleware.isLoggedIn,middleware.isAdmin, function(req, res){
         User.find( function(err, foundUser){
             if(err){
                 req.flash("error", err.message);
@@ -76,7 +89,7 @@ const express = require("express"),
   
 
   //route to verify user's Driving license
-  router.get("/verify/:userid", middleware.isAdmin,function(req, res){
+  router.get("/verify/:userid",middleware.isLoggedIn, middleware.isAdmin,function(req, res){
 
         User.findById(req.params.userid, function(err, found){
             if(!found){
@@ -102,7 +115,7 @@ const express = require("express"),
   // ROUTE TO BLOCK A USER, this route fetches user from db using id then changes block field to true
   // then it calls save function then it finds again all users from database
   // and attaches all users using a variable with renderes page  
-  router.get("/block/:userid",middleware.isAdmin, function(req, res){
+  router.get("/block/:userid", middleware.isLoggedIn,middleware.isAdmin, function(req, res){
 
         User.findById(req.params.userid, function(err, foundUser){
             if(err){

@@ -15,12 +15,12 @@ router.get("/", function(req, res){
 });
 
 //route for login form
-router.get("/login", function(req, res){
+router.get("/login",middleware.isalreadyLoggedin, function(req, res){
     res.render("user/login");
 });
 
 //route for login form handling
-router.post("/login", passport.authenticate("local",{
+router.post("/login", middleware.isalreadyLoggedin, passport.authenticate("local",{
     successRedirect :"/user/dashboard",
     failureRedirect : "/user/login"
 }),function(req, res){});
@@ -73,7 +73,7 @@ router.get("/logout",middleware.isLoggedIn, function(req, res){
 });
 
 //route to show all users
-router.get("/showUsers", function(req, res){
+router.get("/showUsers",middleware.isLoggedIn, function(req, res){
     User.find(function(err, foundUsers){
         if(err){
             res.flash("error", err.message);
