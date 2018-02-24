@@ -72,17 +72,7 @@ router.get("/logout",middleware.isLoggedIn, function(req, res){
     res.redirect("/");
 });
 
-//route to show all users
-router.get("/showUsers",middleware.isLoggedIn, function(req, res){
-    User.find(function(err, foundUsers){
-        if(err){
-            res.flash("error", err.message);
-            return res.redirect("back");
-        }else{
-            res.render("admin/showUser", {users: foundUsers});
-        }
-    });
-});
+
 
 
 //================================================

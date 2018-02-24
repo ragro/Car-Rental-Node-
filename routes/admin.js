@@ -50,7 +50,7 @@ const express = require("express"),
 //   });
   
   //route for dashboard
-  router.get("/dashboard", middleware.isAdmin,function(req,res){
+  router.get("/dashboard",middleware.isLoggedIn, middleware.isAdmin,function(req,res){
       res.render("admin/dashboard");
   });
   

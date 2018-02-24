@@ -12,7 +12,9 @@ middleware.isalreadyLoggedin = function(req, res, next){
     if( !(req.isAuthenticated()) ){
         return next();
     }else{
-        req.flash("error","You can't login to another accound while logginf into one account")
+        req.flash("error","You tried to login again so you logged out for this");
+        req.logout();
+        
         return res.redirect("back");
     }
 }

@@ -10,8 +10,7 @@ const   express       = require("express"),
         User          = require("./models/user"), 
         Car           = require("./models/car");
   
-// mongoose.connect("mongodb://rohitraghav:14cs75@ds143778.mlab.com:43778/mericar");
-mongoose.connect("mongodb://localhost/mericar_v1");
+mongoose.connect("mongodb://rohitraghav:14cs75@ds143778.mlab.com:43778/mericar");
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded( { extended : true } ) );
