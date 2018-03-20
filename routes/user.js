@@ -1,88 +1,118 @@
 
-const express    = require("express"),
+var express    = require("express"),
       passport   = require("passport"),
       router     = express.Router(),
       User       = require("../models/user"),
       car        = require("../models/car"),
-      middleware = require("../middleware/middleware");
+      middleware = require("../middleware/middleware"),
+      bcrypt      =require("bcryptjs"),
+	  jwt         =require("jsonwebtoken");
+	  
 //=================================
 //Routes for User Authentication
 //=================================
 
+router.post('/login',(req,res,next)=>{
+	const username =req.body.username;
+	const password =req.body.password;
+    
+	User.findOne({username:username},(err,user)=>{
+		if(err) 
+			{
+			res.json({success:false, msg:"Somthing went wrong"});
 
-router.get("/", function(req, res){
-    res.render("user/userindex");
+				throw err;
+			}
+		if(!user)
+		{
+			return res.json({success:false, msg:"User not found !"});
+		}
+		User.comparePassword(password,user.password,(err,isMatch)=>{
+		if(err) {
+			throw err;
+			return res.json({success:false, msg:"Somthing went wrong"});
+            
+		}
+
+		if(isMatch)
+		{
+			const token=jwt.sign({data: user},'Hello world',{
+				expiresIn:604800  // 1 Week
+			});
+			return res.json({
+
+				success:true,
+				msg:"Successfully login",
+				token:`Bearer ${token}`,
+				user:{
+                    username:user.username,
+                    fname: user.fname,
+                    lname: user.lname,
+                    phone: user.phone,
+                    email: user.email,
+                    age  : user.age, 
+                    city : user.city,
+                    license: user.license,
+                    usertype   : user.usertype,
+                    verified : user.verified, //this field works as flag for driving license approval
+                    bookedcar : user.bookedcar,
+                    blocked : user.blocked  // this field gives facility to admin to block a user
+                }
+
+			});	
+		}
+
+		else
+		{
+			return res.json({success:false,msg:"Wrong password"});
+		}
+
+
+		});
+	});
+
 });
 
-//route for login form
-router.get("/login",middleware.isalreadyLoggedin, function(req, res){
-    res.render("user/login");
-});
+//route for registration
 
-//route for login form handling
-router.post("/login", middleware.isalreadyLoggedin, passport.authenticate("local",{
-    successRedirect :"/user/dashboard",
-    failureRedirect : "/user/login"
-}),function(req, res){});
+router.post("/register",function(req,res)
+	{
+
+		
+		var newUser=new User(req.body);
+		var password=req.body.password;
 
 
+             bcrypt.genSalt(10,(err,salt)=>{
+             	bcrypt.hash(password,salt,(err,hash)=>{
+             		if(err) throw err;
+             		newUser.password=hash;
 
-//route for register form
-router.get("/register",function(req, res){
-       res.render("user/register");        
-});
+					 newUser.save((err,user)=>{
+						
+						if(err)
+						return res.json({success:false,msg:"This username is already registered !"});
+						 
+						if(user)
+					    return res.json({success:true,msg:"You are Registered"});
+						 
+					 });
+             	});
+             });
+		
+	
+	});
 
-//route to handle register form
-router.post("/register", function(req, res){
-    var newUser = new User({
-        username : req.body.username,
-        fname    : req.body.fname,
-        lname    : req.body.lname,
-        phone    : req.body.phone,
-        email    : req.body.email,
-        age      : req.body.age,
-        city     : req.body.city,
-        license  : req.body.license,
-        usertype     : "user",
-        verified : false,
-        blocked : false
-    });    
 
-    User.register(newUser, req.body.password, function(err, user){
-            if(err){
-                console.log(err.message);
-                return res.render("user/register");
-            }
-
-            passport.authenticate("local")(req, res, function(){  // this method logs in user 
-                    res.redirect("/user/dashboard");
-            });
-    });
-});
-
-//route for dashboard
-router.get("/dashboard",middleware.isLoggedIn,function(req,res){
-    res.render("user/dashboard");
-});
-
-//route for logout
-router.get("/logout",middleware.isLoggedIn, function(req, res){
-    req.flash("success","Logged you Out");
-    req.logout();
-    res.redirect("/");
-});
+router.get("/logout",function(req,res)
+	{
+		req.logout();
+		console.log("User Logged Out");
+		res.json({success:true,msg:"Successfully Logged Out"})
+	 //    req.flash("success", "Successfully Logged Out");		
+		// res.redirect("/articles");
+	});
 
 
 
-
-//================================================
-//Middlewares
-//================================================
-
-// function isLoggedIn(req, res, next){
-//     if(req.isAuthenticated()){
-//        return next();
-//     }
-//     res.redirect("/user/login");
-// };
 module.exports = router;

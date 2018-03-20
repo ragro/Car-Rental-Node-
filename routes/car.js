@@ -2,6 +2,7 @@ const express    =  require("express"),
       router     = express.Router(),
       Car        = require("../models/car"),
       middleware = require("../middleware/middleware"),
+      passport      = require("passport"),
       User       = require("../models/user"),
       usercar    = require("../models/user_car");
 
@@ -13,87 +14,104 @@ const express    =  require("express"),
             res.render("car/addCar");   
        });
    
-       router.post("/findcar", middleware.isLoggedIn, function(req, res){
-            var category = req.body.filter.category;
-            var city  = req.body.filter.city;
-            console.log(category);
-            console.log(city);
-            Car.find({city: city, category: category}, function(err,foundCar){
-                    if(err)
-                    {   
-                        console.log(err.message);
-                       }else{
-                        res.render("car/show", {car: foundCar});
-                       }   
-            });
-            // console.log();
-
-       });
-
-       router.get("/showcar", middleware.isLoggedIn, function(req, res){
-           Car.find(function(err, foundCar){
-               if(err){
-                   return res.redirect("/");
-               }  
-               else{
-                //    console.log(foundCar);
-                   res.render("car/show",{car:foundCar});
-               }
-           });
-       });
    
-       router.post("/addcar", middleware.isAdmin, function(req, res){
-           var newCar = new Car({
-                   name   : req.body.name,
-                   image  : req.body.image,
-                   rate  : req.body.rate,
-                   number : req.body.number,
-                   city   : req.body.city,
-                   available : true,
-                   category : req.body.category,
-                   price : 0 
-            });
-   
-           Car.create(newCar, function(err, addedCar){
-                   if(err){
-                       console.log(err.message);
-                       return res.redirect("/car/addcar");
-                   }else{
-                       return res.redirect("/car/addcar");
-                   }
-           });
-       });
-       
-       router.get("/edit/:car_id", middleware.isAdmin,function(req, res){
-                    Car.findById(req.params.car_id ,function(err, foundCar){
-                        res.render("car/editCar", { car : foundCar });
-                    });
-       });
+            router.post("/findcar", function(req, res){
+                var category = req.body.category
+                var city  = req.body.city
 
-       router.put("/:car_id",middleware.isAdmin,function(req, res){
-            Car.findByIdAndUpdate(req.params.car_id,req.body.car, function(err, car){
+                console.log(category);
+                console.log(city);
+                
+                Car.find({city: city, category: category}, function(err,foundCar){
+                        if(err)
+                        {   
+                            console.log(err.message);
+                        }else{
+                                res.json(foundCar);
+                        }   
+                });
+        });
+
+       router.get("/showcar",function(req, res){
+        Car.find(function(err, foundCar){
+            if(err){
+                console.log("Cars are not fetched");
+                res.json({success:false , message : "car not found"})
+            }  
+            else{
+             //    console.log(foundCar);
+                res.json(foundCar);
+            }
+        });
+    });
+   
+    router.post("/addcar", function(req, res){
+        var newCar = new Car({
+                name   : req.body.name,
+                image  : req.body.image,
+                rate  : req.body.rate,
+                number : req.body.number,
+                city   : req.body.city,
+                available : true,
+                category : req.body.category,
+                price : 0 
+         });
+        //  console.log(newCar);
+        Car.create(newCar, function(err, addedCar){
                 if(err){
-                    req.flash("error", err.message);
-                    return res.redirect("back");
+                    console.log(err.message);
+                    console.log("Car not added");
+                    return res.json({success:false, message:"car not added"});
                 }else{
-                    req.flash("success", "Car successfully updated");
-                    res.redirect("/car/showcar");
+                    console.log("car added");
+                    return res.json(addedCar);
+                }
+        });
+    });
+       
+    //    router.get("/edit/:car_id", middleware.isAdmin,function(req, res){
+    //                 Car.findById(req.params.car_id ,function(err, foundCar){
+    //                     res.render("car/editCar", { car : foundCar });
+    //                 });
+    //    });
+
+       router.get("/edit/:car_id",function(req, res){
+            Car.findById(req.params.car_id ,function(err, foundCar){
+                if(err){
+                    console.log(err.message);
+                }else{
+                    return res.json(foundCar);
+                }
+                
+            });
+        });
+
+      router.put("/:car_id",function(req, res){
+            //console.log(req);
+
+            Car.findByIdAndUpdate(req.params.car_id,req.body, function(err, car){
+                if(err){
+                        console.log("car is not updated");
+                      return res.json({success: "false", message: "car is not updated"});                    
+                }else{
+                         console.log("updated value",car);
+                       return res.json(car);
                 }
             });     
-       });
+        });
 
        //route for giving form for booking car
-router.get("/book/:carid", function(req, res){
-    Car.findById(req.params.carid, function(err, foundCar){
-        if(err){
-            req.flash("error",err.message);
-            return res.redirect("back");
-        }else{
-            res.render("car/bookcar",{car : foundCar});
-        }
-    });
-    
-});
+        router.get("/book/:carid", function(req, res){
+            Car.findById(req.params.carid, function(err, foundCar){
+                if(err){
+                    req.flash("error",err.message);
+                    return res.redirect("back");
+                }else{
+                    res.render("car/bookcar",{car : foundCar});
+                }
+            });
+            
+        });
 
 //route to give checklist
 router.get("/book/:carid/:userid", middleware.isLoggedIn, function(req, res){

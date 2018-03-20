@@ -1,6 +1,6 @@
 
 const mongoose                 = require("mongoose"),
-      passportLocalMongoose    = require("passport-local-mongoose");
+     bcrypt                      =require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
     username:String,
@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
             ref : "car"
 
     }],
-    blocked : Boolean  // this field gives facility to admin to block a user
+    blocked : Boolean ,
+    password:String// this field gives facility to admin to block a user
 });
 
 // const userSchema = new mongoose.Schema({
@@ -26,6 +27,13 @@ const userSchema = new mongoose.Schema({
 //     password : String
 // });
 
-userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", userSchema);
+
+
+module.exports.comparePassword=function(candidatePassword,hash,callback){
+    bcrypt.compare(candidatePassword,hash,(err,isMatch)=>{
+        if(err) throw err;
+        callback(null,isMatch);
+    });
+    }

@@ -1,11 +1,34 @@
+var express      = require("express"),
+    router       = express.Router(),
+    User         = require("../models/user"),
+    passport     = require("passport");
+    
+
 var middleware = { };
 
+middleware.auth = passport.authenticate('jwt', {session:false});
+
 middleware.isLoggedIn = function(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
+    
+    {
+			
+        if(req.user)
+        {    
+        //req.user1=req.user;
+           return next();	
+        
+        }
+        else
+        {
+
+            res.json({
+                success:false,
+                msg:"You need to login first !"
+            });
+        }
     }
-    req.flash("error", "Please Login first");
-    res.redirect("back");
+
+
 }
 
 middleware.isalreadyLoggedin = function(req, res, next){
