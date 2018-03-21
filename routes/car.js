@@ -69,13 +69,7 @@ const express    =  require("express"),
         });
     });
        
-    //    router.get("/edit/:car_id", middleware.isAdmin,function(req, res){
-    //                 Car.findById(req.params.car_id ,function(err, foundCar){
-    //                     res.render("car/editCar", { car : foundCar });
-    //                 });
-    //    });
-
-       router.get("/edit/:car_id",function(req, res){
+        router.get("/edit/:car_id",function(req, res){
             Car.findById(req.params.car_id ,function(err, foundCar){
                 if(err){
                     console.log(err.message);
@@ -179,21 +173,7 @@ router.post("/payment/:carid/:userid", function(req, res){
         req.flash("error","Please Provide valid Card Number and Cvv number");
         res.redirect("back");
     }
-    // if( (detail.cardnumber.length < 16) || (detail[cvv].length <3) ){
-    //     res.flash("error", "Please give valid card number or cvv number");
-    //     res.redirect("back");
-    // }else{
-    //         Car.findById(req.params.carid, function(err, foundcar){
-    //             if(err){
-    //                 res.flash("success","Your car has booked");
-    //                 res.redirect("/car/showcar")
-    //             }
-    //             else{
-    //                 res.render("finalpage",{car : foundcar});
-    //             }                
-    //     });
-    // }
-
+ 
 });
 
       module.exports = router;

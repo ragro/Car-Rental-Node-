@@ -45,7 +45,8 @@ router.post('/login',(req,res,next)=>{
 				msg:"Successfully login",
 				token:`Bearer ${token}`,
 				user:{
-                    username:user.username,
+					username:user.username,
+					userid : user._id,
                     fname: user.fname,
                     lname: user.lname,
                     phone: user.phone,

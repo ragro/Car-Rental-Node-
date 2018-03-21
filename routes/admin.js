@@ -17,7 +17,6 @@ const express = require("express"),
                 res.flash("error", err.message);
                 console.log(err.message);
             }else{
-                console.log(foundUsers);
                 return res.json(foundUsers);
             }
         });
@@ -37,27 +36,50 @@ const express = require("express"),
   
 
   //route to verify user's Driving license
-  router.get("/verify/:userid",function(req, res){
+//   router.get("/verify/:userid",function(req, res){
 
-        User.findById(req.params.userid, function(err, found){
-            if(!found){
-                req.flash("error",err.message);
-                res.redirect("back");
-            }else{
-                found.verified = true;  //changes verified field to true
-                found.save( function(err){ // saves in database
-                    if(err){
-                        req.flash("error", err.message);
-                        res.redirect("back");
-                    }else{
-                        User.find(function(err, allUser){  // finds all user from database and send to verify file
-                            res.render("admin/verify",{ users : allUser } );
-                        });
-                    }
-                });
-            }
-        });        
-  });
+//         User.findById(req.params.userid, function(err, found){
+//             if(!found){
+//                 req.flash("error",err.message);
+//                 res.redirect("back");
+//             }else{
+//                 found.verified = true;  //changes verified field to true
+//                 found.save( function(err){ // saves in database
+//                     if(err){
+//                         req.flash("error", err.message);
+//                         res.redirect("back");
+//                     }else{
+//                         User.find(function(err, allUser){  // finds all user from database and send to verify file
+//                             res.render("admin/verify",{ users : allUser } );
+//                         });
+//                     }
+//                 });
+//             }
+//         });        
+//   });
+
+        router.get("/verify/:userid",function(req, res){
+
+            User.findById(req.params.userid, function(err, found){
+                if(!found){
+                        console.log(err.message);
+                        return res.json({success: false});
+                }else{
+                    found.verified = true;  //changes verified field to true
+                    found.save( function(err){ // saves in database
+                        if(err){
+                            console.log(err.message);
+                            return res.json({success : false});
+                        }else{
+                            User.find(function(err, allUser){  // finds all user from database and send to verify file
+                                console.log(err.message);
+                                return res.json({success : true});
+                            });
+                        }
+                    });
+                }
+            });        
+        });
 
 
   // ROUTE TO BLOCK A USER, this route fetches user from db using id then changes block field to true
