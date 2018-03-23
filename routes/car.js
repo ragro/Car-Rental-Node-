@@ -139,41 +139,58 @@ router.get("/bookcontinue/:carid/:userid", middleware.isLoggedIn, function(req, 
 });
 
 
-router.post("/payment/:carid/:userid", function(req, res){
-    var detail = req.body.pay;
+// router.post("/payment/:carid/:userid", function(req, res){
+//     var detail = req.body.pay;
     
-    if( (detail.cardnumber.length == 16 )&& ( detail.cvv.length == 3 ) ){
+//     if( (detail.cardnumber.length == 16 )&& ( detail.cvv.length == 3 ) ){
+//         User.findById(req.params.userid, function(err, foundUser){  //it saves car detail in booked car
+//             if(err){                                               // field user
+//                 console.log(err.message);
+//             }else{
+//                 Car.findById(req.params.carid, function(err, foundCar){
+//                     if(err){
+//                         req.flash("success","Your car has booked");
+//                         res.redirect("/car/showcar")
+//                     }
+//                     else{
+//                         foundCar.available = false;
+//                         foundCar.save();
+//                         var newBooker = {userid : foundUser._id, carid : foundCar._id};
+//                         usercar.create(newBooker, function(err, newdata){
+//                                 if(err){
+
+//                                 }else{
+//                                     console.log(newdata);
+//                                 }
+//                         });
+//                         res.render("car/finalpage",{car : foundCar});
+//                     }                
+//                 });
+//             }
+//         });
+    
+//     }else{
+//         req.flash("error","Please Provide valid Card Number and Cvv number");
+//         res.redirect("back");
+//     }
+ 
+// });
+
+router.post("/payment/:carid/:userid", function(req, res){
+    
+        console.log(req.params.userid+"===="+req.params.carid);
         User.findById(req.params.userid, function(err, foundUser){  //it saves car detail in booked car
             if(err){                                               // field user
-                console.log(err.message);
+                console.log(" user not found =>"+err.message);
+                return res.json({success:false, message : err.message});
             }else{
-                Car.findById(req.params.carid, function(err, foundCar){
-                    if(err){
-                        req.flash("success","Your car has booked");
-                        res.redirect("/car/showcar")
-                    }
-                    else{
-                        foundCar.available = false;
-                        foundCar.save();
-                        var newBooker = {userid : foundUser._id, carid : foundCar._id};
-                        usercar.create(newBooker, function(err, newdata){
-                                if(err){
+                    foundUser.bookedcar.push(req.params.carid);
+                    foundUser.save();                                  
+                    return res.json({success:true,message:"car is booked"});
+                 }                
+            });
+            
+    });
 
-                                }else{
-                                    console.log(newdata);
-                                }
-                        });
-                        res.render("car/finalpage",{car : foundCar});
-                    }                
-                });
-            }
-        });
-    
-    }else{
-        req.flash("error","Please Provide valid Card Number and Cvv number");
-        res.redirect("back");
-    }
- 
-});
 
       module.exports = router;

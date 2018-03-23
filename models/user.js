@@ -13,11 +13,7 @@ const userSchema = new mongoose.Schema({
     license:String,
     usertype   : String,
     verified : Boolean, //this field works as flag for driving license approval
-    bookedcar : [{
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "car"
-
-    }],
+    bookedcar: Array,
     blocked : Boolean ,
     password:String// this field gives facility to admin to block a user
 });

@@ -29,7 +29,7 @@ router.post('/login',(req,res,next)=>{
 		}
 		User.comparePassword(password,user.password,(err,isMatch)=>{
 		if(err) {
-			throw err;
+			// throw err;
 			return res.json({success:false, msg:"Somthing went wrong"});
             
 		}
