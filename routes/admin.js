@@ -58,7 +58,32 @@ const express = require("express"),
 //         });        
 //   });
 
-        router.get("/verify/:userid",function(req, res){
+
+
+  //route to verify user's Driving license
+//   router.get("/verify/:userid",function(req, res){
+
+//         User.findById(req.params.userid, function(err, found){
+//             if(!found){
+//                 req.flash("error",err.message);
+//                 res.redirect("back");
+//             }else{
+//                 found.verified = true;  //changes verified field to true
+//                 found.save( function(err){ // saves in database
+//                     if(err){
+//                         req.flash("error", err.message);
+//                         res.redirect("back");
+//                     }else{
+//                         User.find(function(err, allUser){  // finds all user from database and send to verify file
+//                             res.render("admin/verify",{ users : allUser } );
+//                         });
+//                     }
+//                 });
+//             }
+//         });        
+//   });
+
+router.get("/verify/:userid",function(req, res){
 
             User.findById(req.params.userid, function(err, found){
                 if(!found){
