@@ -1,4 +1,3 @@
-
 const   express       = require("express"),
         app           = express(),
         bodyParser    = require("body-parser"),
@@ -12,7 +11,6 @@ const   express       = require("express"),
         jwt           = require('jsonwebtoken');
   
 mongoose.connect("mongodb://rohitraghav:14cs75@ds143778.mlab.com:43778/mericar");
-
 
 
 app.use(cors());
